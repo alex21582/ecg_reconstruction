@@ -3,11 +3,13 @@ from pathlib import Path
 import pandas as pd
 from utils import dict_pars_scp, dict_pars_prob, calculate_heart_r
 
-
+# Root directory
 ROOT = Path(__file__).cwd()
+# PTB-XL database directory
 DB_CSV_PATH = ROOT.joinpath('csv_files')
 
 
+# Creating a dictionary with the superclass feature
 def create_superclass():
     sclass_dict = dict()
     superclasses = list(agg_df['diagnostic_class'].unique())
@@ -17,6 +19,7 @@ def create_superclass():
     return sclass_dict
 
 
+# Adding additional features to the database
 def fit_db(data_base):
     data_base.insert(loc=2, column='scp', value=0)
     data_base['scp'] = data_base['scp_codes'].map(dict_pars_scp)

@@ -9,6 +9,7 @@ DB_CSV_PATH = ROOT.joinpath('csv_files')
 df = pd.read_csv(DB_CSV_PATH.joinpath('data_base.csv'), index_col='ecg_id')
 
 
+# Function to create a pie chart for disease superclasses
 def superclasess_pi(data_frame):
     labels = ['Normal ECG (NORM)',
               'Myocardial Infarction (MI)',
@@ -18,7 +19,7 @@ def superclasess_pi(data_frame):
               'Conduction Disturbance (CD)']
 
     data_frame['superclasses'] = data_frame['superclasses'].fillna('NOT')
-    superclasses = data_frame['superclasses'].unique()
+    # superclasses = data_frame['superclasses'].unique()
     data = data_frame['superclasses'].value_counts(normalize=True)
 
     Path(ROOT.joinpath('images')).mkdir(parents=True, exist_ok=True)
@@ -30,6 +31,7 @@ def superclasess_pi(data_frame):
     plt.savefig(ROOT.joinpath('images//superclasses_pi.jpg'), bbox_inches='tight', dpi=600)
 
 
+# Function to create a pie chart for the electrical axis of the heart
 def heart_axis_pi(data_frame):
     labels = ['Unknown (NOT)',
               'Normal axis (MID)',
